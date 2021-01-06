@@ -1,4 +1,4 @@
-package segment
+package client
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func (c *SegmentClient) GetWorkspace() (Workspace, error) {
+func (c *Client) GetWorkspace() (Workspace, error) {
     //https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js
     workspace := Workspace{}
     log.Printf("[DEBUG] HTTP request to API %s ", fmt.Sprintf("%s/v1beta/workspaces/%s", c.HostURL, c.Workspace))

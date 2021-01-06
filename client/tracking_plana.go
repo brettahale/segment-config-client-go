@@ -1,4 +1,4 @@
-package segment
+package client
 
 import (
 	"encoding/json"
@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func (c *SegmentClient) GetTrackingPlan(id string) (TrackingPlan, error) {
+func (c *Client) GetTrackingPlan(id string) (TrackingPlan, error) {
     //https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js
     trackingPlan := TrackingPlan{}
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/v1beta/workspaces/%s/tracking-plans/%s", c.HostURL, c.Workspace, id), nil)

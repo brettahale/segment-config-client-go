@@ -1,4 +1,4 @@
-package segment
+package client
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func (c *SegmentClient) GetFunction(id string) (Function, error) {
+func (c *Client) GetFunction(id string) (Function, error) {
     //https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js
     function := Function{}
     log.Printf("[DEBUG] HTTP request to API %s ", fmt.Sprintf("%s/v1beta/workspaces/%s/functions/%s", c.HostURL, c.Workspace, id))
@@ -30,13 +30,13 @@ func (c *SegmentClient) GetFunction(id string) (Function, error) {
 	return function, nil
 }
 
-func (c *SegmentClient) DeployFunction(id string) (error) {
+func (c *Client) DeployFunction(id string) (error) {
     //curl --location --request GET 'https://platform.segmentapis.com/v1beta/workspaces/workspace_id/functions/sfn_{{source_id}}/deploy' \
     _, err := http.NewRequest("GET", fmt.Sprintf("%s/v1beta/workspaces/%s/functions/%s/deploy", c.HostURL, c.Workspace, id), nil)
     return err
 }
 
-func (c *SegmentClient) IsLatestVersionFunction(id string) (error) {
+func (c *Client) IsLatestVersionFunction(id string) (error) {
     //curl --location --request GET 'https://platform.segmentapis.com/v1beta/workspaces/workspace_id/functions/sfn_{{source_id}}/deploy' \
     _, err := http.NewRequest("GET", fmt.Sprintf("%s/v1beta/workspaces/%s/functions/%s/deploy", c.HostURL, c.Workspace, id), nil)
     return err

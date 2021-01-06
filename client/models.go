@@ -1,4 +1,4 @@
-package segment
+package client
 
 import (
     "encoding/json"

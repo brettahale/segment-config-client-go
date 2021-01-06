@@ -1,4 +1,4 @@
-package segment
+package client
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func (c *SegmentClient) GetCatalogSource(name string) (CatalogSource, error) {
+func (c *Client) GetCatalogSource(name string) (CatalogSource, error) {
     source := CatalogSource{}
     log.Printf("[DEBUG] HTTP request to API %s ", fmt.Sprintf("%s/v1beta/catalog/sources/%s", c.HostURL, name))
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/v1beta/catalog/sources/%s", c.HostURL, name), nil)
@@ -29,7 +29,7 @@ func (c *SegmentClient) GetCatalogSource(name string) (CatalogSource, error) {
 	return source, nil
 }
 
-func (c *SegmentClient) GetCatalogDestination(name string) (CatalogDestination, error) {
+func (c *Client) GetCatalogDestination(name string) (CatalogDestination, error) {
     destination := CatalogDestination{}
     log.Printf("[DEBUG] HTTP request to API %s ", fmt.Sprintf("%s/v1beta/catalog/destinations/%s", c.HostURL, name))
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/v1beta/catalog/destinations/%s", c.HostURL, name), nil)

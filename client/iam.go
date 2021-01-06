@@ -1,4 +1,4 @@
-package segment
+package client
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func (c *SegmentClient) GetIamRoles() ([]IamRole, error) {
+func (c *Client) GetIamRoles() ([]IamRole, error) {
     // 'https://platform.segmentapis.com/v1beta/workspaces/myworkspace/roles'
     iamList:= []IamRole{}
     log.Printf("[DEBUG] HTTP request to API %s ", fmt.Sprintf("%s/v1beta/workspaces/%s/roles", c.HostURL, c.Workspace))
@@ -29,7 +29,7 @@ func (c *SegmentClient) GetIamRoles() ([]IamRole, error) {
 	return iamList, nil
 }
 
-func (c *SegmentClient) GetIamPolicies() ([]IamPolicy, error) {
+func (c *Client) GetIamPolicies() ([]IamPolicy, error) {
     //'https://platform.segmentapis.com/v1beta/workspaces/myworkspace/roles/-/policies'
     iamList:= []IamPolicy{}
     log.Printf("[DEBUG] HTTP request to API %s ", fmt.Sprintf("%s/v1beta/workspaces/%s/roles/-/policies", c.HostURL, c.Workspace))
@@ -51,7 +51,7 @@ func (c *SegmentClient) GetIamPolicies() ([]IamPolicy, error) {
 	return iamList, nil
 }
 
-func (c *SegmentClient) GetIamInvites() ([]IamInvite, error) {
+func (c *Client) GetIamInvites() ([]IamInvite, error) {
     //'https://platform.segmentapis.com/v1beta/workspaces/myworkspace/roles/-/policies'
     iamList:= []IamInvite{}
     log.Printf("[DEBUG] HTTP request to API %s ", fmt.Sprintf("%s/v1beta/workspaces/%s/invites", c.HostURL, c.Workspace))

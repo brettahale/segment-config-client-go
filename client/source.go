@@ -1,4 +1,4 @@
-package segment
+package client
 
 import (
     "bytes"
@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func (c *SegmentClient) GetSource(name string) (Source, error) {
+func (c *Client) GetSource(name string) (Source, error) {
     //https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js
     source := Source{}
     log.Printf("[DEBUG] HTTP request to API %s ", fmt.Sprintf("%s/v1beta/workspaces/%s/sources/%s", c.HostURL, c.Workspace, name))
@@ -31,7 +31,7 @@ func (c *SegmentClient) GetSource(name string) (Source, error) {
 	return source, nil
 }
 
-func (c *SegmentClient) GetSources() ([]Source, error) {
+func (c *Client) GetSources() ([]Source, error) {
     //https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources?page_size=&page_token=
 
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/v1beta/workspaces/%s/sources", c.HostURL, c.Workspace), nil)
@@ -53,7 +53,7 @@ func (c *SegmentClient) GetSources() ([]Source, error) {
 	return sources, nil
 }
 
-func (c *SegmentClient) CreateSource(s Source) (Source, error) {
+func (c *Client) CreateSource(s Source) (Source, error) {
 
     reqBody := SourceCreate{}
     reqBody.Source = s
@@ -78,7 +78,7 @@ func (c *SegmentClient) CreateSource(s Source) (Source, error) {
     return source, nil
 }
 
-func (c *SegmentClient) DeleteSource(name string) (error) {
+func (c *Client) DeleteSource(name string) (error) {
     _, err := http.NewRequest("DELETE", fmt.Sprintf("%s/v1beta/workspaces/%s/sources/%s", c.HostURL, c.Workspace, name), nil)
     return err
 }
