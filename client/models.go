@@ -46,6 +46,10 @@ type FunctionConfig struct {
 	Type        string      `json:"type,omitempty"`
 }
 
+type TrackingPlanCreate struct {
+    TrackingPlan          TrackingPlan              `json:"tracking_plan"`
+}
+
 type TrackingPlan struct {
     Name                string      `json:"name,omitempty"`
     DisplayName         string      `json:"display_name,omitempty"`
