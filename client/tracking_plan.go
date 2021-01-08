@@ -33,29 +33,29 @@ func (c *Client) GetTrackingPlan(id string) (TrackingPlan, error) {
 func (c *Client) CreateTrackingPlan(p TrackingPlan) (TrackingPlan, error) {
 
     reqBody := TrackingPlanCreate{}
-    reqBody.Source = s
+    reqBody.TrackingPlan = p
     payloadBuf := new(bytes.Buffer)
     json.NewEncoder(payloadBuf).Encode(reqBody)
-    source := Source{}
+    trackingPlan := TrackingPlan{}
     req, err := http.NewRequest("POST", fmt.Sprintf("%s/v1beta/workspaces/%s/tracking-plans/%s", c.HostURL, c.Workspace, ), payloadBuf)
     if err != nil {
-    	return source, err
+    	return trackingPlan, err
     }
 
     body, err := c.doRequest(req)
     if err != nil {
-    	return source, err
+    	return trackingPlan, err
     }
 
-    err = json.Unmarshal(body, &source)
+    err = json.Unmarshal(body, &trackingPlan)
     if err != nil {
-    	return source, err
+    	return trackingPlan, err
     }
 
-    return source, nil
+    return trackingPlan, nil
 }
 
-func (c *Client) DeleteSource(name string) (error) {
-    _, err := http.NewRequest("DELETE", fmt.Sprintf("%s/v1beta/workspaces/%s/sources/%s", c.HostURL, c.Workspace, name), nil)
+func (c *Client) DeleteTrackingPlan(name string) (error) {
+    _, err := http.NewRequest("DELETE", fmt.Sprintf("%s/v1beta/workspaces/%s/tracking-plans/%s", c.HostURL, c.Workspace, name), nil)
     return err
 }
