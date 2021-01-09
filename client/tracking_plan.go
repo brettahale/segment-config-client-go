@@ -38,7 +38,7 @@ func (c *Client) CreateTrackingPlan(p TrackingPlan) (TrackingPlan, error) {
     payloadBuf := new(bytes.Buffer)
     json.NewEncoder(payloadBuf).Encode(reqBody)
     trackingPlan := TrackingPlan{}
-    req, err := http.NewRequest("POST", fmt.Sprintf("%s/v1beta/workspaces/%s/tracking-plans/%s", c.HostURL, c.Workspace, ), payloadBuf)
+    req, err := http.NewRequest("POST", fmt.Sprintf("%s/v1beta/workspaces/%s/tracking-plans", c.HostURL, c.Workspace), payloadBuf)
     if err != nil {
     	return trackingPlan, err
     }
