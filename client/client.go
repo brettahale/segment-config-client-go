@@ -56,6 +56,7 @@ func (c *Client) doRequest(req *http.Request, accepts []int) ([]byte, error) {
 	for statusCode := range accepts {
 	    if statusCode == res.StatusCode {
 	        ok = true
+	        break
 	    }
 	}
 
