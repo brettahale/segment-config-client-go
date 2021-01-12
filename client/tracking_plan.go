@@ -47,7 +47,7 @@ func (c *Client) CreateTrackingPlan(p TrackingPlan) (TrackingPlan, error) {
     if err != nil {
     	return trackingPlan, err
     }
-
+    err = nil
     err = json.Unmarshal(body, &trackingPlan)
     if err != nil {
     	return trackingPlan, err

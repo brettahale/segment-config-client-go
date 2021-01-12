@@ -52,17 +52,13 @@ func (c *Client) doRequest(req *http.Request, accepts []int) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-    ok := false
+
 	for _, statusCode := range accepts {
 	    if statusCode == res.StatusCode {
-	        ok = true
-	        break
+	        return body, err
 	    }
 	}
 
-	if !ok {
-		return nil, fmt.Errorf("StatusCode: %d, StatusText: %s,  body: %s", res.StatusCode, http.StatusText(res.StatusCode), body)
-	}
+	return nil, fmt.Errorf("StatusCode: %d, StatusText: %s,  body: %s", res.StatusCode, http.StatusText(res.StatusCode), body)
 
-	return body, err
 }
