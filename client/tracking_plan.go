@@ -15,7 +15,7 @@ func (c *Client) GetTrackingPlan(id string) (TrackingPlan, error) {
 		return trackingPlan, err
 	}
 
-	body, err := c.doRequest(req, []int{http.StatusCreated})
+	body, err := c.doRequest(req, []int{http.StatusOK})
 
 	if err != nil {
 		return trackingPlan, err

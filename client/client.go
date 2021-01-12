@@ -52,11 +52,8 @@ func (c *Client) doRequest(req *http.Request, accepts []int) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-    fmt.Printf("%d - %d\n", accepts, res.StatusCode)
 	for _, statusCode := range accepts {
-	    fmt.Printf("should match? = %d - %d\n", statusCode, res.StatusCode)
 	    if statusCode == res.StatusCode {
-	        fmt.Printf("match = %d - %d\n", statusCode, res.StatusCode)
 	        return body, nil
 	    }
 	}
