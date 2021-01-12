@@ -7,31 +7,31 @@ import (
 	"net/http"
 )
 
-func (c *Client) GetTrackingPlan(id string) (TrackingPlan, *http.Request, error) {
+func (c *Client) GetTrackingPlan(id string) (TrackingPlan, error) {
     //https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js
     trackingPlan := TrackingPlan{}
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/v1beta/workspaces/%s/tracking-plans/%s", c.HostURL, c.Workspace, id), nil)
 	if err != nil {
-		return trackingPlan, req, err
+		return trackingPlan, err
 	}
 
-	body, err := c.doRequest(req)
+	body, err := c.doRequest(req, []int{http.StatusCreated})
 
 	if err != nil {
-		return trackingPlan, req, err
+		return trackingPlan, err
 	}
 
 	err = json.Unmarshal(body, &trackingPlan)
 
 	if err != nil {
-		return trackingPlan, req, err
+		return trackingPlan, err
 	}
 
-	return trackingPlan, req, nil
+	return trackingPlan, nil
 }
 
 
-func (c *Client) CreateTrackingPlan(p TrackingPlan) (TrackingPlan, *http.Request, error) {
+func (c *Client) CreateTrackingPlan(p TrackingPlan) (TrackingPlan, error) {
 
     reqBody := TrackingPlanCreate{}
     reqBody.TrackingPlan = p
@@ -40,23 +40,27 @@ func (c *Client) CreateTrackingPlan(p TrackingPlan) (TrackingPlan, *http.Request
     trackingPlan := TrackingPlan{}
     req, err := http.NewRequest("POST", fmt.Sprintf("%s/v1beta/workspaces/%s/tracking-plans", c.HostURL, c.Workspace), payloadBuf)
     if err != nil {
-    	return trackingPlan, req, err
+    	return trackingPlan, err
     }
 
-    body, err := c.doRequest(req)
+    body, err := c.doRequest(req, []int{http.StatusOK, http.StatusCreated})
     if err != nil {
-    	return trackingPlan, req, err
+    	return trackingPlan, err
     }
 
     err = json.Unmarshal(body, &trackingPlan)
     if err != nil {
-    	return trackingPlan, req, err
+    	return trackingPlan, err
     }
 
-    return trackingPlan, req, nil
+    return trackingPlan, nil
 }
 
-func (c *Client) DeleteTrackingPlan(name string) (string, *http.Request, error) {
+func (c *Client) DeleteTrackingPlan(name string) (error) {
     req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/v1beta/workspaces/%s/tracking-plans/%s", c.HostURL, c.Workspace, name), nil)
-    return name, req, err
+    if err != nil {
+      return err
+    }
+    _, err = c.doRequest(req, []int{http.StatusOK, http.StatusCreated})
+    return err
 }

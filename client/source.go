@@ -17,7 +17,7 @@ func (c *Client) GetSource(name string) (Source, error) {
 		return source, err
 	}
 
-	body, err := c.doRequest(req)
+	body, err := c.doRequest(req, []int{http.StatusOK})
 	if err != nil {
 		return source, err
 	}
@@ -39,7 +39,7 @@ func (c *Client) GetSources() ([]Source, error) {
 		return nil, err
 	}
 
-	body, err := c.doRequest(req)
+	body, err := c.doRequest(req, []int{http.StatusOK})
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ func (c *Client) CreateSource(s Source) (Source, error) {
     	return source, err
     }
 
-    body, err := c.doRequest(req)
+    body, err := c.doRequest(req, []int{http.StatusOK, http.StatusCreated})
     if err != nil {
     	return source, err
     }

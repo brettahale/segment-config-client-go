@@ -16,7 +16,7 @@ func (c *Client) GetIamRoles() ([]IamRole, error) {
 		return iamList, err
 	}
 
-	body, err := c.doRequest(req)
+	body, err := c.doRequest(req, []int{http.StatusOK})
 	if err != nil {
 		return iamList, err
 	}
@@ -38,7 +38,7 @@ func (c *Client) GetIamPolicies() ([]IamPolicy, error) {
 		return iamList, err
 	}
 
-	body, err := c.doRequest(req)
+	body, err := c.doRequest(req, []int{http.StatusOK})
 	if err != nil {
 		return iamList, err
 	}
@@ -60,7 +60,7 @@ func (c *Client) GetIamInvites() ([]IamInvite, error) {
 		return iamList, err
 	}
 
-	body, err := c.doRequest(req)
+	body, err := c.doRequest(req, []int{http.StatusOK})
 	if err != nil {
 		return iamList, err
 	}

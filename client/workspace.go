@@ -16,7 +16,7 @@ func (c *Client) GetWorkspace() (Workspace, error) {
 		return workspace, err
 	}
 
-	body, err := c.doRequest(req)
+	body, err := c.doRequest(req, []int{http.StatusOK})
 	if err != nil {
 		return workspace, err
 	}

@@ -14,7 +14,7 @@ func (c *Client) GetDestination(name string, source_name string) (Destination, e
 		return destination, err
 	}
 
-	body, err := c.doRequest(req)
+	body, err := c.doRequest(req, []int{http.StatusOK})
 	if err != nil {
 		return destination, err
 	}

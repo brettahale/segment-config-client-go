@@ -15,7 +15,7 @@ func (c *Client) GetCatalogSource(name string) (CatalogSource, error) {
 		return source, err
 	}
 
-	body, err := c.doRequest(req)
+	body, err := c.doRequest(req, []int{http.StatusOK})
 	if err != nil {
 		return source, err
 	}
@@ -37,7 +37,7 @@ func (c *Client) GetCatalogDestination(name string) (CatalogDestination, error) 
 		return destination, err
 	}
 
-	body, err := c.doRequest(req)
+	body, err := c.doRequest(req, []int{http.StatusOK})
 	if err != nil {
 		return destination, err
 	}

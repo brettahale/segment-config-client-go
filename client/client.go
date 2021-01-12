@@ -39,7 +39,7 @@ func NewClient(host, workspace, token *string) (*Client, error) {
 	return &c, nil
 }
 
-func (c *Client) doRequest(req *http.Request) ([]byte, error) {
+func (c *Client) doRequest(req *http.Request, accepts []int) ([]byte, error) {
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.Token))
     req.Header.Set("Content-Type", "application/json")
 	res, err := c.HTTPClient.Do(req)
@@ -52,9 +52,15 @@ func (c *Client) doRequest(req *http.Request) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+    ok := false
+	for statusCode := range accepts {
+	    if statusCode == res.StatusCode {
+	        ok = true
+	    }
+	}
 
-	if res.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("status: %d, body: %s", res.StatusCode, body)
+	if !ok {
+		return nil, fmt.Errorf("StatusCode: %d, StatusText: %s,  body: %s", res.StatusCode, http.StatusText(res.StatusCode), body)
 	}
 
 	return body, err

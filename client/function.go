@@ -16,7 +16,7 @@ func (c *Client) GetFunction(id string) (Function, error) {
 		return function, err
 	}
 
-	body, err := c.doRequest(req)
+	body, err := c.doRequest(req, []int{http.StatusOK})
 	if err != nil {
 		return function, err
 	}
