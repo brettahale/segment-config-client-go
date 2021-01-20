@@ -69,8 +69,8 @@ func (c *Client) UpdateTrackingPlan(name string, p TrackingPlan, paths []string)
 	if err != nil {
 		return nil, err
 	}
-	trackingPlan := TrackingPlan{}
-	req, err := http.NewRequest("POST", fmt.Sprintf("%s/v1beta/workspaces/%s/tracking-plans/%s", c.HostURL, c.Workspace, name), payloadBuf)
+
+	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/v1beta/workspaces/%s/tracking-plans/%s", c.HostURL, c.Workspace, name), payloadBuf)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,8 @@ func (c *Client) UpdateTrackingPlan(name string, p TrackingPlan, paths []string)
 	if err != nil {
 		return nil, err
 	}
-	err = nil
+
+	trackingPlan := TrackingPlan{}
 	err = json.Unmarshal(body, &trackingPlan)
 	if err != nil {
 		return nil, err
