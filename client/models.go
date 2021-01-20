@@ -32,10 +32,15 @@ type SourceCreate struct {
     Source          Source              `json:"source"`
 }
 
+type SourceUpdate struct {
+	Source          Source              `json:"source"`
+	UpdateMask		UpdateMask			`json:"update_mask"`
+}
+
 // LibraryConfig contains information about a source's library
 type LibraryConfig struct {
 	MetricsEnabled          bool         `json:"metrics_enabled,omitempty"`
-	RetryQueue              bool         `json:"retry_queue,om   itempty"`
+	RetryQueue              bool         `json:"retry_queue,omitempty"`
 	CrossDomainIDEnabled    bool         `json:"cross_domain_id_enabled,omitempty"`
 	APIHost                 string       `json:"api_host,omitempty"`
 }
@@ -50,10 +55,16 @@ type TrackingPlanCreate struct {
     TrackingPlan          TrackingPlan              `json:"tracking_plan"`
 }
 
+
+type TrackingPlanUpdate struct {
+	TrackingPlan    TrackingPlan        `json:"tracking_plan"`
+	UpdateMask		UpdateMask			`json:"update_mask"`
+}
+
 type TrackingPlan struct {
     Name                string      `json:"name,omitempty"`
     DisplayName         string      `json:"display_name,omitempty"`
-    Rules               Rules       `json:"rules, omitempty"`
+    Rules               Rules       `json:"rules,omitempty"`
     CreateTime          time.Time   `json:"create_time,omitempty"`
     UpdateTime          string       `json:"update_time,omitempty"`
 }
@@ -61,15 +72,15 @@ type TrackingPlan struct {
 type Rules struct {
     Global           json.RawMessage    `json:"global,omitempty"`
     Events           []Event            `json:"events,omitempty"`
-    Identify         json.RawMessage    `json:"identify, omitempty"`
+    Identify         json.RawMessage    `json:"identify,omitempty"`
     Group            json.RawMessage    `json:"group,omitempty"`
 }
 
 type Event struct {
     Name            string              `json:"name,omitempty"`
     Version         int                 `json:"version,omitempty"`
-    Description     string              `json:"description, omitempty"`
-    Rules           json.RawMessage   `json:"rules, omitempty"`
+    Description     string              `json:"description,omitempty"`
+    Rules           json.RawMessage     `json:"rules,omitempty"`
 }
 
 
@@ -107,12 +118,12 @@ type CatalogDestination struct {
     Name            string                  `json:"name,omitempty"`
 	DisplayName     string                  `json:"display_name,omitempty"`
 	Description     string                  `json:"description,omitempty"`
-	Type            string                  `json:type,omitempty`
-	Status          string                  `json:status,omitempty`
-    Logos           DestinationLogos        `json:"description,omitempty"`
-    Settings        []DestinationSetting    `json:"description,omitempty"`
-    Categories      DestinationCategory     `json:"description,omitempty"`
-    Compoenents     []DestinationComponent  `json:"description,omitempty"`
+	Type            string                  `json:"type,omitempty"`
+	Status          string                  `json:"status,omitempty"`
+    Logos           DestinationLogos        `json:"logos,omitempty"`
+    Settings        []DestinationSetting    `json:"settings,omitempty"`
+    Categories      DestinationCategory     `json:"categories,omitempty"`
+    Compoenents     []DestinationComponent  `json:"components,omitempty"`
 }
 
 type DestinationLogos struct {
@@ -171,11 +182,11 @@ type DestinationComponent struct {
 type Function struct {
     Id              string                  `json:"id,omitempty"`
 	DisplayName     string                  `json:"display_name,omitempty"`
-	Type            string                  `json:type,omitempty`
-	Code            string                  `json:code,omitempty`
+	Type            string                  `json:"type,omitempty"`
+	Code            string                  `json:"code,omitempty"`
 	WorkspaceId     string                  `json:"workspace_id,omitempty"`
 	Description     string                  `json:"description,omitempty"`
-	Status          string                  `json:status,omitempty`
+	Status          string                  `json:"status,omitempty"`
 	CreatedAt       time.Time               `json:"created_at,omitempty"`
     CatalogId       string                  `json:"catalog_id,omitempty"`
 	LogoUri         string                  `json:"logo_uri,omitempty"`
@@ -185,29 +196,29 @@ type Function struct {
 type FunctionSettings struct {
     Name            string                `json:"name,omitempty"`
 	Label           string                `json:"label,omitempty"`
-	Type            string                `json:type,omitempty`
-	Sensitive       bool                  `json:sensitive,omitempty`
+	Type            string                `json:"type,omitempty"`
+	Sensitive       bool                  `json:"sensitive,omitempty"`
 	Description     string                `json:"description,omitempty"`
 }
 
 type IamPolicy struct {
     Name            string                `json:"name,omitempty"`
 	DisplayName     string                `json:"display_name,omitempty"`
-	Actions         []string              `json:actions,omitempty`
+	Actions         []string              `json:"actions,omitempty"`
 	Description     string                `json:"description,omitempty"`
 }
 
 type IamRole struct {
     Name            string                `json:"name,omitempty"`
 	Resource        string                `json:"resource,omitempty"`
-	Subject         string                `json:subject,omitempty`
+	Subject         string                `json:"subject,omitempty"`
 }
 
 type IamInvite struct {
     Email            string                 `json:"name,omitempty"`
 	CreateTime       time.Time              `json:"create_time,omitempty"`
-	ExpireTime       time.Time              `json:expire_time,omitempty`
-	policies         []RoleResourceMap      `json:"policies,omitempty"`
+	ExpireTime       time.Time              `json:"expire_time,omitempty"`
+	Policies         []RoleResourceMap      `json:"policies,omitempty"`
 }
 
 type RoleResourceMap struct {
@@ -215,20 +226,7 @@ type RoleResourceMap struct {
     Resource        string      `json:"resource,omitempty"`
 }
 
-// // // UpdateMask contains information for updating Destinations
-// // type UpdateMask struct {
-// // 	Paths []string `json:"paths,omitempty"`
-// // }
-// //
-// // type sourceCreateRequest struct {
-// // 	Source Source `json:"source,omitempty"`
-// // }
-// //
-// // type destinationCreateRequest struct {
-// // 	Destination Destination `json:"destination,omitempty"`
-// // }
-// //
-// // type destinationUpdateRequest struct {
-// // 	Destination Destination `json:"destination,omitempty"`
-// // 	UpdateMask  UpdateMask  `json:"update_mask,omitempty"`
-// // }
+// UpdateMask contains information for updating Destinations
+type UpdateMask struct {
+	Paths []string `json:"paths,omitempty"`
+}
