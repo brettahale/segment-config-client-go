@@ -81,7 +81,7 @@ func (c *Client) CreateSource(s Source) (*Source, error) {
     return &source, nil
 }
 
-func (c *Client) UpdateSource(name, string, s Source, m []string) (*Source, error) {
+func (c *Client) UpdateSource(name string, s Source, m []string) (*Source, error) {
 
 	reqBody := SourceUpdate{}
 	reqBody.Source = s
