@@ -92,7 +92,7 @@ func (c *Client) UpdateSource(name string, s Source, m []string) (*Source, error
 		return nil, err
 	}
 	source := Source{}
-	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/v1beta/workspaces/%s/sources", c.HostURL, c.Workspace, name), payloadBuf)
+	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/v1beta/workspaces/%s/sources/%s", c.HostURL, c.Workspace, name), payloadBuf)
 	if err != nil {
 		return nil, err
 	}
