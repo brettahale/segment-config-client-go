@@ -47,7 +47,7 @@ type LibraryConfig struct {
 
 type FunctionConfig struct {
 	Name        string      `json:"name,omitempty"`
-	Value       []string    `json:"value,omitempty"`
+	Value       string      `json:"value,omitempty"`
 	Type        string      `json:"type,omitempty"`
 }
 
