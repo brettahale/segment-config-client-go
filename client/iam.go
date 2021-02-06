@@ -6,7 +6,19 @@ import (
 	"log"
 	"net/http"
 )
-
+List Roles
+GET
+List Policies
+POST
+Create Policy
+DEL
+Delete Policy
+GET
+List Invites
+POST
+Create Invite
+DEL
+Delete Invite
 func (c *Client) GetIamRoles() ([]IamRole, error) {
     // 'https://platform.segmentapis.com/v1beta/workspaces/myworkspace/roles'
     iamList:= []IamRole{}

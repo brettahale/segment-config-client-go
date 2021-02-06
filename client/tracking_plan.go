@@ -97,3 +97,38 @@ func (c *Client) DeleteTrackingPlan(name string) (error) {
     _, err = c.doRequest(req, []int{http.StatusOK, http.StatusCreated})
     return err
 }
+
+func (c *Client) CreateTrackingPlanSourceConnection(name string, connection TrackingPlanSourceConnection) (*TrackingPlanSourceConnection, error) {
+
+    payloadBuf := new(bytes.Buffer)
+    err := json.NewEncoder(payloadBuf).Encode(connection)
+    if err != nil {
+    	return nil, err
+	}
+    trackingPlanSourceConnection := TrackingPlanSourceConnection{}
+    req, err := http.NewRequest("POST", fmt.Sprintf("%s/v1beta/workspaces/%s/tracking-plans/%s/source-connections", c.HostURL, c.Workspace, name), payloadBuf)
+    if err != nil {
+    	return nil, err
+    }
+
+    body, err := c.doRequest(req, []int{http.StatusOK, http.StatusCreated})
+    if err != nil {
+    	return nil, err
+    }
+    err = nil
+    err = json.Unmarshal(body, &trackingPlanSourceConnection)
+    if err != nil {
+    	return nil, err
+    }
+
+    return &trackingPlanSourceConnection, nil
+}
+
+func (c *Client) DeleteTrackingPlanSourceConnection(trackingPlanName, name string) (error) {
+    req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/v1beta/workspaces/%s/tracking-plans/%s/source-connections/%s", c.HostURL, c.Workspace, trackingPlanName, name), nil)
+    if err != nil {
+      return err
+    }
+    _, err = c.doRequest(req, []int{http.StatusOK, http.StatusCreated})
+    return err
+}

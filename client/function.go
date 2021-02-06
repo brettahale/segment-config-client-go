@@ -7,6 +7,19 @@ import (
 	"net/http"
 )
 
+POST
+Create Function
+GET
+Get Function
+GET
+List Function
+POST
+Preview Function
+PATCH
+Update Function
+DEL
+Delete Function
+
 func (c *Client) GetFunction(id string) (Function, error) {
     //https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js
     function := Function{}
@@ -30,14 +43,3 @@ func (c *Client) GetFunction(id string) (Function, error) {
 	return function, nil
 }
 
-func (c *Client) DeployFunction(id string) (error) {
-    //curl --location --request GET 'https://platform.segmentapis.com/v1beta/workspaces/workspace_id/functions/sfn_{{source_id}}/deploy' \
-    _, err := http.NewRequest("GET", fmt.Sprintf("%s/v1beta/workspaces/%s/functions/%s/deploy", c.HostURL, c.Workspace, id), nil)
-    return err
-}
-
-func (c *Client) IsLatestVersionFunction(id string) (error) {
-    //curl --location --request GET 'https://platform.segmentapis.com/v1beta/workspaces/workspace_id/functions/sfn_{{source_id}}/deploy' \
-    _, err := http.NewRequest("GET", fmt.Sprintf("%s/v1beta/workspaces/%s/functions/%s/deploy", c.HostURL, c.Workspace, id), nil)
-    return err
-}

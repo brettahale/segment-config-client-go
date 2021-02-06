@@ -31,7 +31,7 @@ func (c *Client) GetSource(name string) (*Source, error) {
 	return &source, nil
 }
 
-func (c *Client) GetSources() ([]*Source, error) {
+func (c *Client) ListSource() ([]*Source, error) {
     //https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources?page_size=&page_token=
 
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/v1beta/workspaces/%s/sources", c.HostURL, c.Workspace), nil)
@@ -81,36 +81,27 @@ func (c *Client) CreateSource(s Source) (*Source, error) {
     return &source, nil
 }
 
-func (c *Client) UpdateSource(name string, s Source, m []string) (*Source, error) {
+func (c *Client) GetSourceSchemaConfiguration(schemaConfig GetSourceSchemaConfiguration) (*SourceSchemaConfiguration, error){
+    //GET https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js/schema-config
+}
 
-	reqBody := SourceUpdate{}
-	reqBody.Source = s
-	reqBody.UpdateMask = UpdateMask{Paths: m}
-	payloadBuf := new(bytes.Buffer)
-	err := json.NewEncoder(payloadBuf).Encode(reqBody)
-	if err != nil {
-		return nil, err
-	}
-	source := Source{}
-	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/v1beta/workspaces/%s/sources/%s", c.HostURL, c.Workspace, name), payloadBuf)
-	if err != nil {
-		return nil, err
-	}
+func (c *Client) UpdateSourceSchemaConfiguration( schemaConfig UpdateSourceSchemaConfiguration) (*SourceSchemaConfiguration, error){
+    //PATCH https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js/schema-config
+}
 
-	body, err := c.doRequest(req, []int{http.StatusOK, http.StatusCreated})
-	if err != nil {
-		return nil, err
-	}
-
-	err = json.Unmarshal(body, &source)
-	if err != nil {
-		return nil, err
-	}
-
-	return &source, nil
+func (c *Client) UpdateSourceConnectedWarehouses( connectedWarehouses UpdateSourceConnectedWarehouses) (error){
+    //PATCH https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js/schema-config
 }
 
 func (c *Client) DeleteSource(name string) (error) {
     _, err := http.NewRequest("DELETE", fmt.Sprintf("%s/v1beta/workspaces/%s/sources/%s", c.HostURL, c.Workspace, name), nil)
     return err
+}
+
+func (c *Client) IsLatestVersionSourceFunction () (bool, error) {
+    // GET https://platform.segmentapis.com/v1beta/workspaces/workspace_id/functions/sfn_{{source_id}}
+}
+
+func (c *Client) DeploySourceFunction () error {
+    // POST https://platform.segmentapis.com/v1beta/workspaces/workspace_id/functions/sfn_{{source_id}}/deploy
 }
