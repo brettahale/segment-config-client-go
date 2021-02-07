@@ -33,7 +33,7 @@ func (c *Client) GetTrackingPlan(id string) (*TrackingPlan, error) {
 
 func (c *Client) CreateTrackingPlan(p TrackingPlan) (*TrackingPlan, error) {
 
-    reqBody := TrackingPlanCreate{}
+    reqBody := TrackingPlanUpsert{}
     reqBody.TrackingPlan = p
     payloadBuf := new(bytes.Buffer)
     err := json.NewEncoder(payloadBuf).Encode(reqBody)
@@ -59,9 +59,9 @@ func (c *Client) CreateTrackingPlan(p TrackingPlan) (*TrackingPlan, error) {
     return &trackingPlan, nil
 }
 
-func (c *Client) UpdateTrackingPlan(name string, p TrackingPlan, paths []string) (*TrackingPlan, error) {
+func (c *Client) UpdateTrackingPlan(p TrackingPlan, name string, paths []string) (*TrackingPlan, error) {
 
-	reqBody := TrackingPlanUpdate{}
+	reqBody := TrackingPlanUpsert{}
 	reqBody.TrackingPlan = p
 	reqBody.UpdateMask = UpdateMask{Paths: paths}
 	payloadBuf := new(bytes.Buffer)

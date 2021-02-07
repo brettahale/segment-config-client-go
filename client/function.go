@@ -42,4 +42,3 @@ func (c *Client) GetFunction(id string) (Function, error) {
 
 	return function, nil
 }
-

@@ -32,14 +32,17 @@ type SourceCreate struct {
     Source          Source              `json:"source"`
 }
 
-type SourceUpdate struct {
-	Source          Source              `json:"source"`
-	UpdateMask		UpdateMask			`json:"update_mask"`
+type SourceSchemaConfigurationUpsert struct {
+    SourceSchemaConfiguration    SourceSchemaConfiguration   `json:"schema_config"`
+    UpdateMask                   UpdateMask                  `json:"update_mask,omitempty"`
 }
 
-type CreateSourceSchemaConfiguration struct {
-    SchemaConfig    SourceSchemaConfiguration   `json:"schema_config"`
+
+type SourceConnectedWarehousesUpdate struct {
+    WarehouseId     string   `json:"warehouse_id"`
+    Enabled         bool     `json:"enabled"`
 }
+
 
 type SourceSchemaConfiguration struct {
         AllowUnplannedTrackEvents           bool    `json:"allow_unplanned_track_events"`
@@ -57,6 +60,10 @@ type SourceSchemaConfiguration struct {
     	CommonGroupEventOnViolations        string  `json:"common_group_event_on_violations" `
 }
 
+type SourceLatestFunction struct {
+    IsLatest    bool    `json:"is_latest"`
+}
+
 // LibraryConfig contains information about a source's library
 type LibraryConfig struct {
 	MetricsEnabled          bool         `json:"metrics_enabled,omitempty"`
@@ -71,14 +78,10 @@ type FunctionConfig struct {
 	Type        string      `json:"type,omitempty"`
 }
 
-type TrackingPlanCreate struct {
-    TrackingPlan          TrackingPlan              `json:"tracking_plan"`
-}
-
-
-type TrackingPlanUpdate struct {
+type TrackingPlanUpsert struct {
 	TrackingPlan    TrackingPlan        `json:"tracking_plan"`
-	UpdateMask		UpdateMask			`json:"update_mask"`
+	UpdateMask		UpdateMask			`json:"update_mask,omitempty"`
+    Client          Client              `json:"-"`
 }
 
 type TrackingPlan struct {
@@ -109,8 +112,10 @@ type Event struct {
 }
 
 
-type DestinationCreate struct {
-    Destination          Destination             `json:"destination"`
+type DestinationUpsert struct {
+    Destination             Destination     `json:"destination"`
+    UpdateMask		        UpdateMask		`json:"update_mask,omitempty"`
+    Client                  Client          `json:"-"`
 }
 
 type Destinations struct {
