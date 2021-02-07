@@ -7,18 +7,18 @@ import (
 	"net/http"
 )
 
-POST
-Create Function
-GET
-Get Function
-GET
-List Function
-POST
-Preview Function
-PATCH
-Update Function
-DEL
-Delete Function
+// POST
+// Create Function
+// GET
+// Get Function
+// GET
+// List Function
+// POST
+// Preview Function
+// PATCH
+// Update Function
+// DEL
+// Delete Function
 
 func (c *Client) GetFunction(id string) (Function, error) {
     //https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js

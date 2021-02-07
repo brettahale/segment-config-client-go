@@ -37,6 +37,26 @@ type SourceUpdate struct {
 	UpdateMask		UpdateMask			`json:"update_mask"`
 }
 
+type CreateSourceSchemaConfiguration struct {
+    SchemaConfig    SourceSchemaConfiguration   `json:"schema_config"`
+}
+
+type SourceSchemaConfiguration struct {
+        AllowUnplannedTrackEvents           bool    `json:"allow_unplanned_track_events"`
+        AllowUnplannedIdentifyTraits        bool    `json:"allow_unplanned_identify_traits"`
+        AllowUnplannedGroupTraits           bool    `json:"allow_unplanned_group_traits"`
+        ForwardBlockedEventsTo              string  `json:"forwarding_blocked_events_to"`
+        AllowUnplannedTrackEventProperties  bool    `json:"allow_unplanned_track_event_properties"`
+        AllowTrackEventOnViolations         bool    `json:"allow_track_event_on_violations"`
+        AllowIdentifyTraitsOnViolations     bool    `json:"allow_identify_traits_on_violations"`
+        AllowGroupTraitsOnViolations        bool    `json:"allow_group_traits_on_violations"`
+        ForwardingViolationsTo              string  `json:"forwarding_violations_to"`
+        AllowTrackPropertiesOnViolations    bool    `json:"allow_track_properties_on_violations"`
+        CommonTrackEventOnViolations        string  `json:"common_track_event_on_violations"`
+    	CommonIdentifyEventOnViolations     string  `json:"common_identify_event_on_violations"`
+    	CommonGroupEventOnViolations        string  `json:"common_group_event_on_violations" `
+}
+
 // LibraryConfig contains information about a source's library
 type LibraryConfig struct {
 	MetricsEnabled          bool         `json:"metrics_enabled,omitempty"`
@@ -69,6 +89,11 @@ type TrackingPlan struct {
     UpdateTime          string       `json:"update_time,omitempty"`
 }
 
+type TrackingPlanSourceConnection struct {
+    SourceName      string      `json:"source_name"`
+    TrackingPlanId  string      `json:"tracking_plan_id"`
+}
+
 type Rules struct {
     Global           json.RawMessage    `json:"global,omitempty"`
     Events           []Event            `json:"events,omitempty"`
@@ -84,7 +109,10 @@ type Event struct {
 }
 
 
-// Destinations defines the struct for the destination object
+type DestinationCreate struct {
+    Destination          Destination             `json:"destination"`
+}
+
 type Destinations struct {
 	Destinations []Destination `json:"destinations,omitempty"`
 }
@@ -141,6 +169,11 @@ type DestinationSetting struct {
 	MapValidators       MapValidator            `json:"map_validators,omitempty"`
 	Settings            []string                `json:"settings,omitempty"`
 }
+
+type DestinationFilterCreate struct {
+    Filter DestinationFilter `json:"filter,omitempty"`
+}
+
 // does not work with field_list action
 type DestinationFilter struct {
     Name            string                  `json:"name,omitempty"`

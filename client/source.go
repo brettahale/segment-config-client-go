@@ -80,28 +80,28 @@ func (c *Client) CreateSource(s Source) (*Source, error) {
 
     return &source, nil
 }
-
-func (c *Client) GetSourceSchemaConfiguration(schemaConfig GetSourceSchemaConfiguration) (*SourceSchemaConfiguration, error){
-    //GET https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js/schema-config
-}
-
-func (c *Client) UpdateSourceSchemaConfiguration( schemaConfig UpdateSourceSchemaConfiguration) (*SourceSchemaConfiguration, error){
-    //PATCH https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js/schema-config
-}
-
-func (c *Client) UpdateSourceConnectedWarehouses( connectedWarehouses UpdateSourceConnectedWarehouses) (error){
-    //PATCH https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js/schema-config
-}
-
-func (c *Client) DeleteSource(name string) (error) {
-    _, err := http.NewRequest("DELETE", fmt.Sprintf("%s/v1beta/workspaces/%s/sources/%s", c.HostURL, c.Workspace, name), nil)
-    return err
-}
-
-func (c *Client) IsLatestVersionSourceFunction () (bool, error) {
-    // GET https://platform.segmentapis.com/v1beta/workspaces/workspace_id/functions/sfn_{{source_id}}
-}
-
-func (c *Client) DeploySourceFunction () error {
-    // POST https://platform.segmentapis.com/v1beta/workspaces/workspace_id/functions/sfn_{{source_id}}/deploy
-}
+// TODO: Finish Source  Methods
+// func (c *Client) GetSourceSchemaConfiguration(schemaConfig GetSourceSchemaConfiguration) (*SourceSchemaConfiguration, error){
+//     //GET https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js/schema-config
+// }
+//
+// func (c *Client) UpdateSourceSchemaConfiguration( schemaConfig UpdateSourceSchemaConfiguration) (*SourceSchemaConfiguration, error){
+//     //PATCH https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js/schema-config
+// }
+//
+// func (c *Client) UpdateSourceConnectedWarehouses( connectedWarehouses UpdateSourceConnectedWarehouses) (error){
+//     //PATCH https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js/schema-config
+// }
+//
+// func (c *Client) DeleteSource(name string) (error) {
+//     _, err := http.NewRequest("DELETE", fmt.Sprintf("%s/v1beta/workspaces/%s/sources/%s", c.HostURL, c.Workspace, name), nil)
+//     return err
+// }
+//
+// func (c *Client) IsLatestVersionSourceFunction () (bool, error) {
+//     // GET https://platform.segmentapis.com/v1beta/workspaces/workspace_id/functions/sfn_{{source_id}}
+// }
+//
+// func (c *Client) DeploySourceFunction () error {
+//     // POST https://platform.segmentapis.com/v1beta/workspaces/workspace_id/functions/sfn_{{source_id}}/deploy
+// }

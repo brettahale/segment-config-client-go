@@ -1,12 +1,13 @@
 package client
 
 import (
+    "bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
 )
 
-func (c *Client) ListDestination(name string, source_name string) ([]Destination, error) {
+func (c *Client) ListDestination(source_name string) ([]Destination, error) {
     //https://platform.segmentapis.com/v1beta/workspaces/myworkspace/sources/js
     var destinations []Destination
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/v1beta/workspaces/%s/sources/%s/destinations", c.HostURL, c.Workspace, source_name), nil)
@@ -50,7 +51,7 @@ func (c *Client) GetDestination(name string, source_name string) (Destination, e
 	return destination, nil
 }
 
-func (c *Client) CreateDestination(name string, source_name string) (*Destination, error) {
+func (c *Client) CreateDestination(d Destination, source_name string) (*Destination, error) {
     reqBody := DestinationCreate{}
     reqBody.Destination = d
     payloadBuf := new(bytes.Buffer)
@@ -77,7 +78,7 @@ func (c *Client) CreateDestination(name string, source_name string) (*Destinatio
     return &destination, nil
 }
 
-func (c *Client) UpdateDestination(name string, source_name string) (*Destination, error) {
+func (c *Client) UpdateDestination(d Destination, name string, source_name string) (*Destination, error) {
     reqBody := DestinationCreate{}
     reqBody.Destination = d
     payloadBuf := new(bytes.Buffer)
@@ -108,3 +109,24 @@ func (c *Client) DeleteDestination(source_name, name string) (error) {
     _, err := http.NewRequest("DELETE", fmt.Sprintf("%s/v1beta/workspaces/%s/sources/%s/destinations/%s", c.HostURL, c.Workspace, source_name, name), nil)
     return err
 }
+
+// Need the client, maybe make client=workspace
+// func (d *Destination) CreateDestinationFilter(f DestinationFilter) (*DestinationFilter, error){
+//     return CreateDestinationFilter(d.Name, f)
+// }
+//
+// func (d *Destination) UpdateDestinationFilter(f DestinationFilter) (*DestinationFilter, error){
+//     return UpdateDestinationFilter(d.Name, f)
+// }
+//
+// func (d *Destination) DeleteDestinationFilter(f DestinationFilter) error{
+//     return DeleteDestinationFilter(d.Name, f)
+// }
+//
+// func (d *Destination) GetDestinationFilter(f DestinationFilter) (*DestinationFilter, error){
+//     return GetDestinationFilter(d.Name, f)
+// }
+//
+// func (d *Destination) ListDestinationFilter(f DestinationFilter) ([]DestinationFilter, error){
+//     return ListDestinationFilter(d.Name, f)
+// }
